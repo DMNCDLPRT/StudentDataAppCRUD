@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">StudentDataApp</string>
+    <string name="app_name_create">Create Student</string>
+
+    <!-- Text view Strings -->
+    <string name="head_create">Please Enter the details Below</string>
+    <string name="tv_update_id">Enter the Student I.D. of the student you want to update</string>
+
+    <!-- Button Strings -->
+    <string name="add">Add Student</string>
+    <string name="create">Create</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="get">Get</string>
+
+    <!-- Edit Text Strings -->
+    <string name="student_name">Name</string>
+    <string name="section">Section</string>
+    <string name="course">Course</string>
+    <string name="year">Year</string>
+    <string name="id">I.D.</string>
+    <string name="add_data">Add Data</string>
+</resources>
