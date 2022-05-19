@@ -20,6 +20,9 @@
         <activity
             android:name="activity_create"
             android:label="@string/app_name_create" />
+        <activity
+            android:name=".activity_update"
+            android:label="@string/app_name_create" />
     </application>
 
 </manifest>

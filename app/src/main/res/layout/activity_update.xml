@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context=".activity_update"
+
     android:orientation="vertical">
 
     <TextView
@@ -16,7 +17,7 @@
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/Student"
+        android:id="@+id/Student_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -28,7 +29,7 @@
         android:textColorHint="#757575" />
 
     <EditText
-        android:id="@+id/Section"
+        android:id="@+id/Section_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -39,7 +40,7 @@
         android:minHeight="48dp"
         android:textColorHint="#757575" />
     <EditText
-        android:id="@+id/Course"
+        android:id="@+id/Course_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -50,7 +51,7 @@
         android:minHeight="48dp"
         android:textColorHint="#757575" />
     <EditText
-        android:id="@+id/Year"
+        android:id="@+id/Year_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"

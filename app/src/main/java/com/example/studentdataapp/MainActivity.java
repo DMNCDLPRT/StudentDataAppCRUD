@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +19,10 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     StringBuffer buffer;
 
-    EditText Student, Section, Course, Year;
     RecyclerView.LayoutManager layoutManager;
     recyclerViewAdapter RecyclerViewAdapter;
 
-    List<String> list;
+    ArrayList<String> studentID, studentName, section, course, year;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,33 +31,35 @@ public class MainActivity extends AppCompatActivity {
         myDatabase = new dbHelper(this);
 
         recyclerView = findViewById(R.id.recyclerView);
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(MainActivity.this);
 
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerViewAdapter = new recyclerViewAdapter(list);
-        recyclerView.setAdapter(RecyclerViewAdapter);
 
-        Student = findViewById(R.id.Student);
-        Section = findViewById(R.id.Section);
-        Course = findViewById(R.id.Course);
-        Year = findViewById(R.id.Year);
+
+        studentID = new ArrayList<>();
+        studentName = new ArrayList<>();
+        section = new ArrayList<>();
+        course = new ArrayList<>();
+        year = new ArrayList<>();
+
+        storeData();
+        RecyclerViewAdapter = new recyclerViewAdapter(MainActivity.this, studentID, studentName, section, course, year);
+        recyclerView.setAdapter(RecyclerViewAdapter);
     }
 
-    public List<String> getAllStudent() {
-        Cursor result = myDatabase.getAllData();
-
-        String studentList = "";
-
-        while (result.moveToNext()) {
-            buffer.append("Student: ").append(result.getString(0));
-            buffer.append(" Section: ").append(result.getString(1));
-            buffer.append(" Course: ").append(result.getString(2));
-            buffer.append(" Year: ").append(result.getString(3));
-            studentList += buffer;
-
-            list.add(studentList);
+    void storeData() {
+        Cursor cursor = myDatabase.getAllData();
+        if (cursor.getCount() == 0) {
+            Toast.makeText(this, "No data. ", Toast.LENGTH_SHORT).show();
+        } else {
+            while (cursor.moveToNext()) {
+                studentID.add(cursor.getString(0));
+                studentName.add(cursor.getString(1));
+                section.add(cursor.getString(2));
+                course.add(cursor.getString(3));
+                year.add(cursor.getString(4));
+            }
         }
-        return new ArrayList<String>(list);
     }
 
     public void onClick(View view) {

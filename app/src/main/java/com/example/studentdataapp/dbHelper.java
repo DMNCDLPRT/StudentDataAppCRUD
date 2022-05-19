@@ -44,7 +44,12 @@ public class dbHelper extends SQLiteOpenHelper {
 
     public Cursor getAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        Cursor cursor = null;
+
+        if (db != null) {
+            cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        }
+        return cursor;
 
     }
 
@@ -56,7 +61,6 @@ public class dbHelper extends SQLiteOpenHelper {
     public boolean updateData(String id, String student, String section, String course, String year){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_1, id);
         contentValues.put(COLUMN_2, student);
         contentValues.put(COLUMN_3, section);
         contentValues.put(COLUMN_4, course);
