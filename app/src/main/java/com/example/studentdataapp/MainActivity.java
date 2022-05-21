@@ -9,16 +9,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     dbHelper myDatabase;
     RecyclerView recyclerView;
-    StringBuffer buffer;
 
     RecyclerView.LayoutManager layoutManager;
     recyclerViewAdapter RecyclerViewAdapter;
@@ -56,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void onClick(View view) {
+        Intent i = new Intent(MainActivity.this, activity_create.class);
+        startActivity(i);
+    }
+
     void storeData() {
         Cursor cursor = myDatabase.getAllData();
         if (cursor.getCount() == 0) {
@@ -69,10 +71,5 @@ public class MainActivity extends AppCompatActivity {
                 year.add(cursor.getString(4));
             }
         }
-    }
-
-    public void onClick(View view) {
-        Intent i = new Intent(MainActivity.this, activity_create.class);
-        startActivity(i);
     }
 }
