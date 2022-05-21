@@ -1,5 +1,6 @@
 package com.example.studentdataapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -29,9 +30,12 @@ public class activity_create extends AppCompatActivity {
                 Section.getText().toString(),
                 Course.getText().toString(),
                 Year.getText().toString());
-        if (create)
+        if (create){
             Toast.makeText(activity_create.this, "Data Inserted successfully", Toast.LENGTH_LONG).show();
-        else
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else
             Toast.makeText(activity_create.this, "Error", Toast.LENGTH_LONG).show();
     }
 }

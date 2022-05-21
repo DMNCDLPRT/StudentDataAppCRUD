@@ -1,5 +1,6 @@
 package com.example.studentdataapp;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -32,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(MainActivity.this);
 
         recyclerView.setLayoutManager(layoutManager);
-
 
         studentID = new ArrayList<>();
         studentName = new ArrayList<>();
@@ -71,5 +74,20 @@ public class MainActivity extends AppCompatActivity {
                 year.add(cursor.getString(4));
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.my_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.deleteAll) {
+            Toast.makeText(this, "All Data has been Deleted", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

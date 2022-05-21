@@ -28,6 +28,7 @@
             android:parentActivityName=".activity_update">
 
         </activity>
+
     </application>
 
 </manifest>

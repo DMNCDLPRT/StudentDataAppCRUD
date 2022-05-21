@@ -1,5 +1,6 @@
 package com.example.studentdataapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ public class activity_update extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
+        myDatabase = new dbHelper(activity_update.this);
 
         Student = findViewById(R.id.Student_update);
         Section = findViewById(R.id.Section_update);
@@ -37,17 +39,18 @@ public class activity_update extends AppCompatActivity {
         }
 
         updateButton.setOnClickListener(view -> {
-            myDatabase = new dbHelper(activity_update.this);
             student = Student.getText().toString().trim();
             section = Section.getText().toString().trim();
             course = Course.getText().toString().trim();
             year = Year.getText().toString().trim();
 
             myDatabase.updateData(id, student, section, course, year);
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
         });
 
         deleteButton.setOnClickListener( view -> {
-            myDatabase = new dbHelper(activity_update.this);
             alertDialog();
         });
     }
@@ -76,7 +79,10 @@ public class activity_update extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete " + student + " ?");
         builder.setMessage("Are you sure you want to delete " + student + " ?");
-        builder.setPositiveButton("Yes", (dialogInterface, i) -> myDatabase.deleteData(id));
+        builder.setPositiveButton("Yes", (dialogInterface, i) ->{
+            myDatabase.deleteData(id);
+            finish();
+        });
         builder.setNegativeButton("No", (dialogInterface, i) -> { });
 
         builder.create().show();
