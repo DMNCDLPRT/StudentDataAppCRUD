@@ -34,5 +34,4 @@ public class activity_create extends AppCompatActivity {
         else
             Toast.makeText(activity_create.this, "Error", Toast.LENGTH_LONG).show();
     }
-
 }

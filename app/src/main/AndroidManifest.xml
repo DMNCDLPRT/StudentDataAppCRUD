@@ -25,7 +25,7 @@
 
         <activity
             android:name=".activity_update"
-            android:label="@string/app_name_update">
+            android:parentActivityName=".activity_update">
 
         </activity>
     </application>
