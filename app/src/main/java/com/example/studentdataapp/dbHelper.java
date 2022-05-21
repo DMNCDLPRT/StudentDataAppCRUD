@@ -5,8 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 public class dbHelper extends SQLiteOpenHelper {
+
+    private final Context context;
     public static final String DB_NAME = "Student.db";
     public static final String TABLE_NAME = "studentTable";
     public static final String COLUMN_1 = "ID";
@@ -17,6 +20,7 @@ public class dbHelper extends SQLiteOpenHelper {
 
     public dbHelper (Context context){
         super(context, DB_NAME, null, 1);
+        this.context = context;
         SQLiteDatabase db = this.getWritableDatabase();
     }
 
@@ -58,15 +62,20 @@ public class dbHelper extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE ID = " + id, null);
     }
 
-    public boolean updateData(String id, String student, String section, String course, String year){
+    public void updateData(String id, String student, String section, String course, String year){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_2, student);
         contentValues.put(COLUMN_3, section);
         contentValues.put(COLUMN_4, course);
         contentValues.put(COLUMN_5, year);
-        db.update(TABLE_NAME, contentValues, "id = ?", new String[] { id } );
-        return true;
+        long result = db.update(TABLE_NAME, contentValues, "id = ?", new String[] { id } );
+        
+        if (result == -1) {
+            Toast.makeText(context, "Failed to Update", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Successfully Updated", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public Integer deleteData(String id){

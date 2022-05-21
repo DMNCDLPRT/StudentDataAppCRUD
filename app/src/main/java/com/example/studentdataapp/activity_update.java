@@ -1,7 +1,6 @@
 package com.example.studentdataapp;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,9 +11,8 @@ public class activity_update extends AppCompatActivity {
 
     dbHelper myDatabase;
 
-
     EditText Student, Section, Course, Year;
-    Button updateButton = findViewById(R.id.btnUpdate);
+    Button updateButton;
 
     String id, student, section, course, year;
 
@@ -22,18 +20,25 @@ public class activity_update extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
-        myDatabase = new dbHelper(activity_update.this);
 
         Student = findViewById(R.id.Student_update);
         Section = findViewById(R.id.Section_update);
         Course = findViewById(R.id.Course_update);
         Year = findViewById(R.id.Year_update);
-
-        updateButton.setOnClickListener(view -> {
-        });
+        updateButton = findViewById(R.id.btnUpdate);
 
         getIntentData();
-        myDatabase.updateData(id, student, section, course, year);
+
+        updateButton.setOnClickListener(view -> {
+            myDatabase = new dbHelper(activity_update.this);
+
+            student = Student.getText().toString().trim();
+            section = Section.getText().toString().trim();
+            course = Course.getText().toString().trim();
+            year = Year.getText().toString().trim();
+
+            myDatabase.updateData(id, student, section, course, year);
+        });
     }
 
     void getIntentData() {
@@ -47,16 +52,12 @@ public class activity_update extends AppCompatActivity {
             year = getIntent().getStringExtra("Year");
 
             // setting intent data
-            Student.setText(id);
+            Student.setText(student);
             Section.setText(section);
             Course.setText(course);
             Year.setText(year);
         } else {
             Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    public void updateStudent(View view) {
-
     }
 }

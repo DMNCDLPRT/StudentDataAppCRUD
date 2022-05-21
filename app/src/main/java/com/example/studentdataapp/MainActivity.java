@@ -1,5 +1,6 @@
 package com.example.studentdataapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,8 +44,16 @@ public class MainActivity extends AppCompatActivity {
         year = new ArrayList<>();
 
         storeData();
-        RecyclerViewAdapter = new recyclerViewAdapter(MainActivity.this, studentID, studentName, section, course, year);
+        RecyclerViewAdapter = new recyclerViewAdapter(MainActivity.this, this, studentID, studentName, section, course, year);
         recyclerView.setAdapter(RecyclerViewAdapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if  (requestCode == 0) {
+            recreate();
+        }
     }
 
     void storeData() {

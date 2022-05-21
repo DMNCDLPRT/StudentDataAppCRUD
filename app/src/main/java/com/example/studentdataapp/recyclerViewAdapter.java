@@ -1,5 +1,6 @@
 package com.example.studentdataapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -15,11 +16,13 @@ import java.util.ArrayList;
 
 public class recyclerViewAdapter extends RecyclerView.Adapter <recyclerViewAdapter.MyViewHolder> {
 
-    ArrayList<String> studentID, studentName, section, course, year;
     Context context;
+    Activity activity;
+    ArrayList<String> studentID, studentName, section, course, year;
 
-    public recyclerViewAdapter(Context context, ArrayList studentID, ArrayList studentName, ArrayList section, ArrayList course,
+    public recyclerViewAdapter(Activity activity, Context context, ArrayList studentID, ArrayList studentName, ArrayList section, ArrayList course,
                                ArrayList year){
+        this.activity = activity;
         this.context = context;
         this.studentID = studentID;
         this.studentName = studentName;
@@ -38,13 +41,11 @@ public class recyclerViewAdapter extends RecyclerView.Adapter <recyclerViewAdapt
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-
         holder.studentID_tv.setText(studentID.get(position));
         holder.studentName_tv.setText(studentName.get(position));
         holder.section_tv.setText(section.get(position));
         holder.course_tv.setText(course.get(position));
         holder.year_tv.setText(year.get(position));
-
         holder.mainLayout.setOnClickListener(view -> {
             Intent intent = new Intent(context, activity_update.class);
             intent.putExtra("ID", String.valueOf(studentID.get(position)));
@@ -53,7 +54,7 @@ public class recyclerViewAdapter extends RecyclerView.Adapter <recyclerViewAdapt
             intent.putExtra("Course", String.valueOf(course.get(position)));
             intent.putExtra("Year", String.valueOf(year.get(position)));
 
-            context.startActivity(intent);
+            activity.startActivityForResult(intent, 1);
         });
     }
 

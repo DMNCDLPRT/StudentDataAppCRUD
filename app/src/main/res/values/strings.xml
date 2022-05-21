@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">StudentDataApp</string>
     <string name="app_name_create">Create Student</string>
+    <string name="app_name_update">Update Student</string>
 
     <!-- Text view Strings -->
     <string name="head_create">Please Enter the details Below</string>
