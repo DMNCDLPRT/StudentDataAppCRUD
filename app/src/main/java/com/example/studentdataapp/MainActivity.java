@@ -2,6 +2,7 @@ package com.example.studentdataapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView.LayoutManager layoutManager;
     recyclerViewAdapter RecyclerViewAdapter;
+    ImageView emptyImageView;
+    TextView noData;
 
     ArrayList<String> studentID, studentName, section, course, year;
 
@@ -36,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(MainActivity.this);
 
         recyclerView.setLayoutManager(layoutManager);
+        emptyImageView = findViewById(R.id.imageView);
+        noData = findViewById(R.id.noData_tv);
 
         studentID = new ArrayList<>();
         studentName = new ArrayList<>();
@@ -64,7 +71,9 @@ public class MainActivity extends AppCompatActivity {
     void storeData() {
         Cursor cursor = myDatabase.getAllData();
         if (cursor.getCount() == 0) {
-            Toast.makeText(this, "No data. ", Toast.LENGTH_SHORT).show();
+            emptyImageView.setVisibility(View.VISIBLE);
+            noData.setVisibility(View.VISIBLE);
+
         } else {
             while (cursor.moveToNext()) {
                 studentID.add(cursor.getString(0));
@@ -73,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
                 course.add(cursor.getString(3));
                 year.add(cursor.getString(4));
             }
+            emptyImageView.setVisibility(View.GONE);
+            noData.setVisibility(View.GONE);
         }
     }
 
@@ -86,8 +97,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.deleteAll) {
-            Toast.makeText(this, "All Data has been Deleted", Toast.LENGTH_SHORT).show();
+            alertDialog();
         }
         return super.onOptionsItemSelected(item);
     }
+
+    void alertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete All Data");
+        builder.setMessage("Are you sure you want to delete all Data?");
+        builder.setPositiveButton("Yes", (dialogInterface, i) ->{
+            myDatabase.deleteAllData();
+            // Toast.makeText(this, "All Data has been Deleted", Toast.LENGTH_SHORT).show();
+            recreate();
+        });
+        builder.setNegativeButton("No", (dialogInterface, i) -> { });
+
+        builder.create().show();
+    }
+
+
 }

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +21,8 @@ public class recyclerViewAdapter extends RecyclerView.Adapter <recyclerViewAdapt
     Context context;
     Activity activity;
     ArrayList<String> studentID, studentName, section, course, year;
+
+    Animation translate_anim;
 
     public recyclerViewAdapter(Activity activity, Context context, ArrayList studentID, ArrayList studentName, ArrayList section, ArrayList course,
                                ArrayList year){
@@ -63,7 +67,7 @@ public class recyclerViewAdapter extends RecyclerView.Adapter <recyclerViewAdapt
         return studentID.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView studentID_tv, studentName_tv, section_tv, course_tv, year_tv;
         LinearLayout mainLayout;
 
@@ -74,8 +78,9 @@ public class recyclerViewAdapter extends RecyclerView.Adapter <recyclerViewAdapt
             section_tv = itemView.findViewById(R.id.section_tv);
             course_tv = itemView.findViewById(R.id.course_tv);
             year_tv = itemView.findViewById(R.id.year_tv);
-
             mainLayout = itemView.findViewById(R.id.recyclerViewMain);
+            translate_anim = AnimationUtils.loadAnimation(context, R.anim.translate_animation);
+            mainLayout.setAnimation(translate_anim);
 
         }
     }

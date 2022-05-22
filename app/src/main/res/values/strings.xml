@@ -2,10 +2,15 @@
     <string name="app_name">StudentDataApp</string>
     <string name="app_name_create">Create Student</string>
     <string name="app_name_update">Update Student</string>
+    <string name="myName">Dominic Del Puerto</string>
 
     <!-- Text view Strings -->
     <string name="head_create">Please Enter the details Below</string>
     <string name="tv_update_id">Enter the Student I.D. of the student you want to update</string>
+
+    <!-- Empty Database -->
+    <string name="icon_description">Empty Database</string>
+    <string name="text_empty">Database Empty</string>
 
     <!-- Button Strings -->
     <string name="add">Add Student</string>

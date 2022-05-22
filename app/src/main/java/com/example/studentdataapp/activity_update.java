@@ -78,7 +78,7 @@ public class activity_update extends AppCompatActivity {
     void alertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete " + student + " ?");
-        builder.setMessage("Are you sure you want to delete " + student + " ?");
+        builder.setMessage("Are you sure you want to Delete " + student + " ?");
         builder.setPositiveButton("Yes", (dialogInterface, i) ->{
             myDatabase.deleteData(id);
             finish();
